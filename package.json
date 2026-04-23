@@ -1,0 +1,24 @@
+{
+  "name": "toprps",
+  "version": "1.0.0",
+  "description": "Part of TOP Foundations curriculum :)",
+  "main": "rockpaperscissors.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itscelo/TOPRPS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/itscelo/TOPRPS/issues"
+  },
+  "homepage": "https://github.com/itscelo/TOPRPS#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
