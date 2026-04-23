@@ -343,22 +343,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#entities-and-attributes" class="md-nav__link">
+  <a href="#entity-relationship-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Entities and Attributes
+        Entity-Relationship Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Entities and Attributes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-schema-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Schema Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Schema Specification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-game-entity-rpsgame" class="md-nav__link">
+  <a href="#1-game-entity-rpsgame-class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Game (Entity: RPSGame)
+        1. Game Entity (RPSGame class)
       
     </span>
   </a>
@@ -366,10 +377,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-round-entity-roundresult" class="md-nav__link">
+  <a href="#2-round-entity-rounddata-object" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Round (Entity: RoundResult)
+        2. Round Entity (roundData object)
       
     </span>
   </a>
@@ -382,41 +393,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relationships" class="md-nav__link">
+  <a href="#json-object-mapping-flaskmongodb-style" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relationships
+        JSON Object Mapping (Flask/MongoDB Style)
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#json-schema-representation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON Schema Representation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="JSON Schema Representation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#game-state" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Game State
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -455,22 +438,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#entities-and-attributes" class="md-nav__link">
+  <a href="#entity-relationship-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Entities and Attributes
+        Entity-Relationship Overview
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Entities and Attributes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-schema-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Schema Specification
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Schema Specification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-game-entity-rpsgame" class="md-nav__link">
+  <a href="#1-game-entity-rpsgame-class" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Game (Entity: RPSGame)
+        1. Game Entity (RPSGame class)
       
     </span>
   </a>
@@ -478,10 +472,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-round-entity-roundresult" class="md-nav__link">
+  <a href="#2-round-entity-rounddata-object" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Round (Entity: RoundResult)
+        2. Round Entity (roundData object)
       
     </span>
   </a>
@@ -494,41 +488,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relationships" class="md-nav__link">
+  <a href="#json-object-mapping-flaskmongodb-style" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relationships
+        JSON Object Mapping (Flask/MongoDB Style)
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#json-schema-representation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON Schema Representation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="JSON Schema Representation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#game-state" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Game State
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -550,105 +516,140 @@
 
 
 <h1 id="data-model-schema">Data Model &amp; Schema</h1>
-<p>This section documents the data structures and schemas used by the RPS engine.</p>
-<h2 id="entities-and-attributes">Entities and Attributes</h2>
-<h3 id="1-game-entity-rpsgame">1. Game (Entity: <code>RPSGame</code>)</h3>
-<p>Represents a single match consisting of multiple rounds.</p>
+<p>This documentation provides a comprehensive overview of the entities, attributes, and relationships within the Rock Paper Scissors engine, following industry standards similar to MongoDB and Flask documentation.</p>
+<h2 id="entity-relationship-overview">Entity-Relationship Overview</h2>
+<p>The system is designed around two primary entities: the <strong>Game Session</strong> and the <strong>Round</strong>.</p>
+<pre class="mermaid"><code>erDiagram
+    GAME ||--o{ ROUND : contains
+    GAME {
+        int bestOf
+        int winThreshold
+        int p1Score
+        int p2Score
+        string winner
+        boolean gameOver
+    }
+    ROUND {
+        int roundNumber
+        string p1Move
+        string p2Move
+        string result
+    }</code></pre>
+<h2 id="detailed-schema-specification">Detailed Schema Specification</h2>
+<h3 id="1-game-entity-rpsgame-class">1. Game Entity (<code>RPSGame</code> class)</h3>
+<p>The root entity that manages the state of a "Best of N" match.</p>
 <table>
 <thead>
 <tr>
 <th>Attribute</th>
-<th>Type</th>
+<th>Data Type</th>
+<th>Validation Rules</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>bestOf</code></td>
-<td>Integer</td>
-<td>Total rounds to be played (Must be odd).</td>
+<td><code>Integer</code></td>
+<td><code>&gt; 0</code>, <code>&lt; 100</code>, <code>isOdd</code></td>
+<td>The total number of rounds possible in the session.</td>
 </tr>
 <tr>
 <td><code>winThreshold</code></td>
-<td>Integer</td>
-<td>Rounds required to win the game.</td>
+<td><code>Integer</code></td>
+<td><code>ceil(bestOf / 2)</code></td>
+<td>The number of round wins required to end the game.</td>
 </tr>
 <tr>
 <td><code>p1Score</code></td>
-<td>Integer</td>
-<td>Current score for Player 1.</td>
+<td><code>Integer</code></td>
+<td><code>min: 0</code></td>
+<td>Cumulative wins for Player 1.</td>
 </tr>
 <tr>
 <td><code>p2Score</code></td>
-<td>Integer</td>
-<td>Current score for Player 2.</td>
+<td><code>Integer</code></td>
+<td><code>min: 0</code></td>
+<td>Cumulative wins for Player 2.</td>
 </tr>
 <tr>
 <td><code>gameOver</code></td>
-<td>Boolean</td>
-<td>Whether the match has concluded.</td>
+<td><code>Boolean</code></td>
+<td>Default: <code>false</code></td>
+<td>Becomes <code>true</code> once a player reaches the <code>winThreshold</code>.</td>
 </tr>
 <tr>
 <td><code>winner</code></td>
-<td>String</td>
-<td>The winner of the match (<code>p1</code>, <code>p2</code>, or <code>null</code>).</td>
+<td><code>String</code></td>
+<td><code>enum: ['p1', 'p2', null]</code></td>
+<td>Identifies the winner of the entire session.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="2-round-entity-roundresult">2. Round (Entity: <code>RoundResult</code>)</h3>
-<p>Represents the outcome of a single encounter.</p>
+<h3 id="2-round-entity-rounddata-object">2. Round Entity (<code>roundData</code> object)</h3>
+<p>Represents a discrete interaction within a Game Session.</p>
 <table>
 <thead>
 <tr>
 <th>Attribute</th>
-<th>Type</th>
+<th>Data Type</th>
+<th>Validation Rules</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>roundNumber</code></td>
-<td>Integer</td>
-<td>The sequence number of the round.</td>
+<td><code>Integer</code></td>
+<td><code>auto-increment</code></td>
+<td>The index of the round in the <code>rounds</code> array.</td>
 </tr>
 <tr>
 <td><code>p1Move</code></td>
-<td>String</td>
-<td>Move chosen by Player 1.</td>
+<td><code>String</code></td>
+<td><code>enum: ['rock', 'paper', 'scissors']</code></td>
+<td>The move chosen by Player 1.</td>
 </tr>
 <tr>
 <td><code>p2Move</code></td>
-<td>String</td>
-<td>Move chosen by Player 2.</td>
+<td><code>String</code></td>
+<td><code>enum: ['rock', 'paper', 'scissors']</code></td>
+<td>The move chosen by Player 2.</td>
 </tr>
 <tr>
 <td><code>result</code></td>
-<td>String</td>
-<td>Result of the round (<code>p1</code>, <code>p2</code>, or <code>draw</code>).</td>
+<td><code>String</code></td>
+<td><code>enum: ['p1', 'p2', 'draw']</code></td>
+<td>The outcome determined by the engine logic.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="relationships">Relationships</h2>
-<ul>
-<li>A <strong>Game</strong> consists of 1 to <code>N</code> <strong>Rounds</strong>.</li>
-<li>Each <strong>Round</strong> is associated with exactly one <strong>Game</strong>.</li>
-</ul>
-<h2 id="json-schema-representation">JSON Schema Representation</h2>
-<h3 id="game-state">Game State</h3>
+<h2 id="json-object-mapping-flaskmongodb-style">JSON Object Mapping (Flask/MongoDB Style)</h2>
+<p>When the game state is serialized (e.g., for API responses or database storage), it follows this nested structure:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GameState&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">&quot;bestOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">&quot;winThreshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;p1Score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&quot;p2Score&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">&quot;gameOver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">&quot;winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;null&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">&quot;roundsPlayed&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">}</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;507f1f77bcf86cd799439011&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-22T14:00:00Z&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">&quot;session&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="nt">&quot;best_of&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="nt">&quot;win_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="nt">&quot;p1_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="nt">&quot;p2_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="nt">&quot;is_finished&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">      </span><span class="nt">&quot;final_winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p1&quot;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;round&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rock&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scissors&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p1&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;round&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paper&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scissors&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p2&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;round&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scissors&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;p2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paper&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;winner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p1&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="p">}</span>
 </code></pre></div>
 
 
@@ -699,7 +700,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

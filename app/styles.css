@@ -1,0 +1,119 @@
+:root {
+  --color-primary: hsl(56, 50%, 90%);
+  --color-secondary: hsl(56, 50%, 10%);
+  --color-tertiary: hsl(116, 80%, 20%);
+  --color-accent: hsl(356, 80%, 20%);
+}
+
+.container {
+  display: flex;
+  gap: 3rem;
+}
+
+body {
+  flex-direction: column;
+  margin: 0;
+  height: 100vh; /* full viewport height */
+  display: flex; /* enable flexbox */
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  background-color: var(--color-primary);
+}
+
+#rock {
+  padding: 9px;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  border-style: none;
+  border-radius: 6px;
+  width: 80px;
+  height: 40px;
+}
+#scissors {
+  padding: 9px;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  border-style: none;
+  border-radius: 6px;
+  width: 80px;
+  height: 40px;
+}
+
+#paper {
+  padding: 9px;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  border-style: none;
+  border-radius: 6px;
+  width: 80px;
+  height: 40px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#output {
+  margin-top: 1rem;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  margin-bottom: 2rem;
+}
+
+#winner {
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  margin-bottom: 2rem;
+}
+
+#computerScore {
+  display: flex;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  width: 80px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 2rem;
+}
+
+#humanScore {
+  display: flex;
+  background-color: oklch(0.7 0.05 100);
+  color: var(--color-primary);
+  width: 80px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: "Zalando Sans Expanded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 2rem;
+}
