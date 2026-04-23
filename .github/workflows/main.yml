@@ -27,7 +27,7 @@ jobs:
     - name: Run Tests with Coverage
       run: npm test
 
-  docs-and-deploy:
+  deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -42,12 +42,18 @@ jobs:
     - name: Install MkDocs
       run: pip install mkdocs-material
       
-    - name: Build and Deploy Docs to GitHub Pages
-      run: mkdocs gh-deploy --force
-
-    - name: Cloud Deployment Placeholder
+    - name: Prepare Deployment Directory
       run: |
-        echo "Simulating Cloud Deployment of the Web App..."
-        # This is where you would add steps to deploy to Azure/AWS/Linode
-        # For a web app, static hosting on GitHub Pages is often sufficient
-        echo "Deployment to Cloud Storage complete."
+        mkdir -p site/app
+        # Build documentation into the root of the 'site' folder
+        mkdocs build -d site
+        # Copy the web application into a subfolder 'app' for cloud access
+        cp -r index.html styles.css rockpaperscissors.js images site/app/
+        # Add a placeholder for external Cloud Server deployment
+        echo "Mirroring to Cloud Infrastructure (AWS/Azure/Linode)..."
+        
+    - name: Deploy to GitHub Pages (Cloud Hosting)
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
