@@ -16,9 +16,9 @@ jobs:
       matrix:
         node-version: [18.x, 20.x]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -32,10 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
         
@@ -44,16 +44,19 @@ jobs:
       
     - name: Prepare Deployment Directory
       run: |
-        mkdir -p site/app
-        # Build documentation into the root of the 'site' folder
+        # 1. Build documentation first (this cleans the 'site' directory)
         mkdocs build -d site
-        # Copy the web application into a subfolder 'app' for cloud access
+        
+        # 2. Create app directory AFTER building docs
+        mkdir -p site/app
+        
+        # 3. Copy web application files
         cp -r index.html styles.css rockpaperscissors.js images site/app/
-        # Add a placeholder for external Cloud Server deployment
-        echo "Mirroring to Cloud Infrastructure (AWS/Azure/Linode)..."
+        
+        echo "Deployment directory prepared successfully."
         
     - name: Deploy to GitHub Pages (Cloud Hosting)
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./site
