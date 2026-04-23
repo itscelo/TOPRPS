@@ -79,3 +79,4 @@ The project uses GitHub Actions (`.github/workflows/main.yml`) to:
 1. **Automate Testing**: Runs `npm test` on every push and pull request to the `main` branch.
 2. **Matrix Build**: Validates the code against multiple Node.js versions (18.x, 20.x).
 3. **Deployment Placeholder**: Includes a structured job for cloud deployment (e.g., Firebase, Netlify).
+ 
