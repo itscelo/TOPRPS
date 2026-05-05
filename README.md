@@ -1,6 +1,6 @@
 # Rock Paper Scissors - University Project
 
-This project implements a robust Rock Paper Scissors engine with a focus on CI/CD and automated testing (Whitebox & Blackbox).
+This project implements a robust Rock Paper Scissors game with a focus on CI/CD and automated testing (Whitebox & Blackbox).
 
 ## 🚀 Usage Guide
 
