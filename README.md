@@ -2,7 +2,7 @@
 
 This project implements a robust Rock Paper Scissors game with a focus on CI/CD and automated testing (Whitebox & Blackbox).
 
-## 🚀 Usage Guide
+## Usage Guide
 
 ### Prerequisites
 - Node.js (v18+)
@@ -25,7 +25,7 @@ The `game.js` file contains the pure logic separated from any UI. It features:
 - **Best of N**: Supports multi-round games (e.g., Best of 3, Best of 5).
 - **Branching Complexity**: Designed to demonstrate high statement, block, and path coverage.
 
-## 📊 Testing Strategy
+## Testing Strategy
 
 ### Whitebox Tests
 - **Path Coverage**: Every possible win/loss/draw combination in `determineRoundResult` is tested.
@@ -38,7 +38,7 @@ The `game.js` file contains the pure logic separated from any UI. It features:
     - **Valid Class**: {'rock', 'paper', 'scissors'} (including case sensitivity and whitespace).
     - **Invalid Class**: {null, undefined, numbers, random strings}.
 
-## 📑 Data Model & Schema
+## Data Model & Schema
 
 ### Input Parameters
 | Parameter | Type | Description |
